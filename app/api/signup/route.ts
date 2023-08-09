@@ -1,14 +1,13 @@
-import User from "@/app/models/User";
+import User from "@/app/api/models/User";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+import connectToDB from "../../utils/connectToDB";
 
-export default async (req: NextRequest, res: NextResponse) => {
+connectToDB()
+
+export const POST = async (req: NextRequest, res: NextResponse) => {
     try {
-        if (req.method != 'POST') {
-            return NextResponse.json({ message: 'Route not found' }, { status: 404 })
-        }
-
         const reqBody = await req.json()
         const { username, password } = reqBody
 
@@ -30,7 +29,8 @@ export default async (req: NextRequest, res: NextResponse) => {
 
         return response
 
-    } catch (error) {
+    } catch (error: any) {
+        console.log(error.message)
         return NextResponse.json({ message: 'Something went wrong' })
     }
 }
