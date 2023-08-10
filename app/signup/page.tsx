@@ -19,7 +19,7 @@ export default () => {
             await axios.post('/api/signup', { username, password })
             router.push('/profile')
         } catch (error: any) {
-            toast.error(error.message)
+            toast.error(error?.response?.data?.message || error?.message)
         } finally {
             setSubmitting(false)
         }
