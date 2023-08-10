@@ -12,10 +12,15 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
         const { username, password } = reqBody
 
         if (!username) {
-            return NextResponse.json({ message: 'Username is required' })
+            return NextResponse.json({ message: 'Username is required' }, {status: 400})
         }
         if (!password) {
-            return NextResponse.json({ message: 'Password is required' })
+            return NextResponse.json({ message: 'Password is required' }, {status: 400})
+        }
+
+        const usernameTaken = await User.findOne({username})
+        if(usernameTaken){
+            return NextResponse.json({message: 'Username is taken'}, {status : 400})
         }
 
         const hashedPassword = await bcrypt.hash(password, 10)
@@ -31,6 +36,6 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
 
     } catch (error: any) {
         console.log(error.message)
-        return NextResponse.json({ message: 'Something went wrong' })
+        return NextResponse.json({ message: 'Something went wrong' }, {status: 500})
     }
 }
