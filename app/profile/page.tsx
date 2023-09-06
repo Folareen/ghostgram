@@ -12,7 +12,7 @@ export default () => {
     useEffect(() => {
         (async () => {
             try {
-                const res = await axios.get('/api/username')
+                const res = await axios.get('/api/profile')
                 setUsername(res.data.username)
             } catch (error: any) {
                 toast.error(error?.response?.data?.message || error?.response?.data?.error || error?.message)
