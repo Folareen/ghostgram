@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 export function middleware(request: NextRequest) {
-    const privatePath = '/profile'
+    const privatePaths = ['/profile', '/messages']
     const publicPaths = [
         '/login',
         '/signup'
@@ -14,7 +14,7 @@ export function middleware(request: NextRequest) {
     if (token && publicPaths.includes(pathname)) {
         return NextResponse.redirect(new URL('/profile', request.url))
     }
-    if (!token && privatePath == pathname) {
+    if (!token && privatePaths.includes(pathname)) {
         return NextResponse.redirect(new URL('/login', request.url))
     }
 }
@@ -25,5 +25,6 @@ export const config = {
         '/login',
         '/signup',
         '/profile',
+        '/messages'
     ],
 }
