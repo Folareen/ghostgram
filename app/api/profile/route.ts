@@ -1,5 +1,8 @@
+import connectToDB from "@/app/utils/connectToDB";
 import jwt from "jsonwebtoken";
 import { NextRequest, NextResponse } from "next/server";
+
+connectToDB()
 
 export const GET = async (req: NextRequest) => {
     try {
