@@ -9,6 +9,10 @@ const MessageSchema = new Schema({
         type: String,
         ref: 'User',
         required: true,
+    }, type: {
+        type: String,
+        enum : ['file','text'],
+        default: 'text'
     }
 }, {timestamps: true})
 
