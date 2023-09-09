@@ -36,7 +36,7 @@ const Page = () => {
                     <div>
                         {
                             messages.map(({ message }) => (
-                                <p>
+                                <p key={message}>
                                     {message}
                                 </p>
                             ))
