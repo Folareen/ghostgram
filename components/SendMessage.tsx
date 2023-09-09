@@ -5,7 +5,7 @@ import { useParams, useRouter } from "next/navigation"
 import { FormEvent, useState } from "react"
 import { toast } from "react-toastify"
 
-export default () => {
+const SendMessage = () => {
     const { username } = useParams()
     const [message, setMessage] = useState('')
     const [attachment, setAttachment] = useState<any>(null)
@@ -62,3 +62,5 @@ export default () => {
 
     </div>
 }
+
+export default SendMessage
