@@ -9,12 +9,11 @@ const MessageSchema = new Schema({
         type: String,
         ref: 'User',
         required: true,
-    }, type: {
+    }, attachment: {
         type: String,
-        enum : ['file','text'],
-        default: 'text'
+        default: ''
     }
-}, {timestamps: true})
+}, { timestamps: true })
 
 const Message = models.Message || model('Message', MessageSchema);
 
