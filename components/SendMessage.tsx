@@ -8,6 +8,7 @@ import { toast } from "react-toastify"
 export default () => {
     const { username } = useParams()
     const [message, setMessage] = useState('')
+    const [attachment, setAttachment] = useState<any>(null)
     const [sending, setSending] = useState(false)
 
     const router = useRouter()
@@ -16,10 +17,22 @@ export default () => {
         try {
             e.preventDefault()
             setSending(true)
-            await axios.post('/api/send-message', { receiver: username, content: message })
+            let attachmentUrl = ''
+            if (attachment) {
+                const formData = new FormData()
+                formData.append('file', attachment)
+                formData.append('upload_preset', 'GhostGram');
+                const response = await axios.post(
+                    `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+                    formData
+                );
+                attachmentUrl = response.data.secure_url
+            }
+            await axios.post('/api/send-message', { receiver: username, content: message, attachment: attachmentUrl })
             router.push('/signup')
             toast.success('message sent, its now your turn')
         } catch (error: any) {
+            console.log(error)
             toast.error(error?.response?.data?.message || error.message)
         } finally {
             setSending(false)
@@ -34,6 +47,9 @@ export default () => {
             <input placeholder="enter message" onChange={(e) => {
                 setMessage(e.target.value)
             }} value={message} />
+            <input type='file' onChange={(e) => {
+                setAttachment(e.currentTarget?.files && e.currentTarget?.files[0])
+            }} />
             <button disabled={sending} type='submit'>
                 {
                     sending ?
