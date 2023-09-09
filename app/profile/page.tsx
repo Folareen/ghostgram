@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 import { toast } from "react-toastify"
 
 
-export default () => {
+const Page = () => {
     const [username, setUsername] = useState('')
     const [loading, setLoading] = useState(true)
 
@@ -44,3 +44,5 @@ export default () => {
 
     </div>
 }
+
+export default Page

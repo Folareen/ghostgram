@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import { FormEvent, useState } from "react"
 import { toast } from "react-toastify"
 
-export default () => {
+const Page = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [submitting, setSubmitting] = useState(false)
@@ -44,3 +44,5 @@ export default () => {
         </div>
     )
 }
+
+export default Page
