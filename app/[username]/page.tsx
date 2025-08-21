@@ -34,8 +34,8 @@ export default async function Page({ params }: { params: any }) {
                     </h1>
 
                     <p className="text-xl text-ghost-text-secondary mb-8 max-w-xl mx-auto leading-relaxed">
-                        The user <span className="text-ghost-accent font-semibold">@{params.username}</span> doesn't exist on GhostGram.
-                        They might have a different username or haven't joined yet.
+                        The user <span className="text-ghost-accent font-semibold">@{params.username}</span> doesn&apos;t exist on GhostGram.
+                        They might have a different username or haven&apos;t joined yet.
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">

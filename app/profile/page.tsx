@@ -210,7 +210,7 @@ const Page = () => {
                             </div>
                             <h3 className="text-xl font-semibold text-white mb-4">No Messages Yet</h3>
                             <p className="text-ghost-text-secondary mb-6 leading-relaxed max-w-2xl mx-auto">
-                                You haven't received any anonymous messages yet. Share your profile link to start receiving messages!
+                                You haven&apos;t received any anonymous messages yet. Share your profile link to start receiving messages!
                             </p>
                             <button
                                 onClick={copyProfileLink}

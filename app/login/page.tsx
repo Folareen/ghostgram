@@ -123,7 +123,7 @@ const Page = () => {
 
                     <div className="text-center">
                         <p className="text-ghost-text-secondary text-lg">
-                            Don't have an account?{' '}
+                            Don&apos;t have an account?{' '}
                             <Link href="/signup" className="text-ghost-accent hover:text-cyan-400 font-semibold transition-colors duration-300 hover:underline">
                                 Sign up here
                             </Link>

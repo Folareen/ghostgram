@@ -124,7 +124,7 @@ const SendMessage = () => {
                             <div className="flex items-start space-x-3">
                                 <span className="text-ghost-accent text-base">🔒</span>
                                 <p className="font-text text-ghost-text-secondary text-sm">
-                                    Your message will be completely anonymous. The recipient won't know who sent it.
+                                    Your message will be completely anonymous. The recipient won&apos;t know who sent it.
                                 </p>
                             </div>
                             <div className="flex items-start space-x-3">
