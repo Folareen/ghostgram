@@ -151,12 +151,12 @@ const Page = () => {
                     </div>
                 </div>
 
-                <div className="glass rounded-3xl p-10 hover:border-ghost-accent/30 transition-all duration-300 border border-transparent">
+                <div className="glass rounded-3xl p-2 md:p-10 hover:border-ghost-accent/30 transition-all duration-300 border border-transparent">
                     <div className="flex items-center justify-between mb-8">
-                        <h2 className="text-3xl font-bold text-white">
+                        <h2 className="text-2xl md:text-3xl font-bold text-white">
                             Anonymous Messages ({messages.length})
                         </h2>
-                        <div className="text-ghost-text-secondary text-lg bg-white/5 px-4 py-2 rounded-xl">
+                        <div className="hidden md:block text-ghost-text-secondary text-lg bg-white/5 px-4 py-2 rounded-xl">
                             {messages.length === 0 ? 'No messages yet' : `${messages.length} message${messages.length === 1 ? '' : 's'}`}
                         </div>
                     </div>

@@ -8,6 +8,7 @@ import { toast } from 'react-toastify'
 
 const Header = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const router = useRouter()
 
     useEffect(() => {
@@ -29,6 +30,7 @@ const Header = () => {
         try {
             await axios.post('/api/logout')
             setIsLoggedIn(false)
+            setIsMobileMenuOpen(false)
             toast.success('Successfully logged out')
             router.push('/login')
         } catch (error: any) {
@@ -38,20 +40,20 @@ const Header = () => {
     }
 
     return (
-        <header className='w-full top-0 right-0 left-0 fixed z-50 p-4'>
-            <div className='glass rounded-2xl px-5 py-3 w-11/12 mx-auto max-w-6xl flex justify-between items-center border border-ghost-border/60 shadow-[0_8px_30px_rgba(0,0,0,0.25)]'>
-                <div className="flex items-center space-x-6">
-                    <Link href="/" className="flex items-center space-x-3 group">
-                        <div className="w-8 h-8 bg-gradient-to-br from-ghost-accent to-ghost-purple rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300">
-                            <span className="text-lg">👻</span>
+        <header className='w-full top-0 right-0 left-0 fixed z-50 p-2 sm:p-4'>
+            <div className='glass rounded-2xl px-3 sm:px-5 py-3 w-full mx-auto max-w-6xl flex justify-between items-center border border-ghost-border/60 shadow-[0_8px_30px_rgba(0,0,0,0.25)]'>
+                <div className="flex items-center space-x-3 sm:space-x-6">
+                    <Link href="/" className="flex items-center space-x-2 sm:space-x-3 group">
+                        <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-br from-ghost-accent to-ghost-purple rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300">
+                            <span className="text-sm sm:text-lg">👻</span>
                         </div>
-                        <span className="text-xl font-bold font-logo bg-gradient-to-r from-ghost-accent to-ghost-purple bg-clip-text text-transparent">
+                        <span className="text-lg sm:text-xl font-bold font-logo bg-gradient-to-r from-ghost-accent to-ghost-purple bg-clip-text text-transparent">
                             GhostGram
                         </span>
                     </Link>
                 </div>
 
-                <nav className="flex items-center space-x-6">
+                <nav className="hidden sm:flex items-center space-x-6">
                     {isLoggedIn && (
                         <>
                             <Link
@@ -91,7 +93,68 @@ const Header = () => {
                         </div>
                     )}
                 </nav>
+
+                <div className="sm:hidden">
+                    <button
+                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                        className="text-ghost-text hover:text-ghost-accent transition-colors duration-300 p-2"
+                    >
+                        {isMobileMenuOpen ? (
+                            <span className="text-xl">✕</span>
+                        ) : (
+                            <span className="text-xl">☰</span>
+                        )}
+                    </button>
+                </div>
             </div>
+
+            {isMobileMenuOpen && (
+                <div className="sm:hidden absolute top-full left-2 right-2 mt-2 glass rounded-2xl border border-ghost-border/60 shadow-[0_8px_30px_rgba(0,0,0,0.25)] overflow-hidden">
+                    <div className="p-4 space-y-3">
+                        {isLoggedIn ? (
+                            <>
+                                <Link
+                                    href="/messages"
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="block font-button text-ghost-text hover:text-ghost-accent transition-colors duration-300 font-medium text-base py-2 px-3 rounded-lg hover:bg-white/5"
+                                >
+                                    Messages
+                                </Link>
+                                <Link
+                                    href="/profile"
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="block font-button text-ghost-text hover:text-ghost-accent transition-colors duration-300 font-medium text-base py-2 px-3 rounded-lg hover:bg-white/5"
+                                >
+                                    Profile
+                                </Link>
+                                <button
+                                    onClick={handleLogout}
+                                    className="w-full text-left font-button text-red-400 hover:text-red-300 transition-colors duration-300 font-medium text-base py-2 px-3 rounded-lg hover:bg-red-500/10"
+                                >
+                                    Logout
+                                </button>
+                            </>
+                        ) : (
+                            <>
+                                <Link
+                                    href="/login"
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="block font-button text-ghost-text hover:text-ghost-accent transition-colors duration-300 font-medium text-base py-2 px-3 rounded-lg hover:bg-white/5"
+                                >
+                                    Login
+                                </Link>
+                                <Link
+                                    href="/signup"
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="block font-button text-ghost-text hover:text-ghost-accent transition-colors duration-300 font-medium text-base py-2 px-3 rounded-lg hover:bg-white/5"
+                                >
+                                    Sign Up
+                                </Link>
+                            </>
+                        )}
+                    </div>
+                </div>
+            )}
         </header>
     )
 }
