@@ -155,8 +155,10 @@ const Page = () => {
 
                     <div className="text-center">
                         <p className="text-ghost-text-secondary text-lg">
-                            Already have an account?{' '}
-                            <Link href="/login" className="text-ghost-accent hover:text-cyan-400 font-semibold transition-colors duration-300 hover:underline">
+                            <span>
+                                Already have an account?{' '}
+                            </span>
+                            <Link href="/login" className="text-ghost-accent hover:text-cyan-400 font-semibold transition-colors duration-300 hover:underline block">
                                 Sign in here
                             </Link>
                         </p>

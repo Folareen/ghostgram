@@ -151,7 +151,7 @@ const Page = () => {
                     </div>
                 </div>
 
-                <div className="glass rounded-3xl p-2 md:p-10 hover:border-ghost-accent/30 transition-all duration-300 border border-transparent">
+                <div className="glass rounded-3xl px-2 md:px-8 py-8 hover:border-ghost-accent/30 transition-all duration-300 border border-transparent">
                     <div className="flex items-center justify-between mb-8">
                         <h2 className="text-2xl md:text-3xl font-bold text-white">
                             Anonymous Messages ({messages.length})
@@ -206,9 +206,9 @@ const Page = () => {
                                             <div className="w-10 h-10 bg-gradient-to-br from-cyan-400 to-purple-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
                                                 <span className="text-lg">👻</span>
                                             </div>
-                                            <div className="text-base font-medium text-ghost-text">
+                                            <div className="text-sm md:text-base font-medium text-ghost-text">
                                                 {new Date(createdAt).toLocaleDateString('en-US', {
-                                                    month: 'short',
+                                                    month: 'long',
                                                     day: 'numeric'
                                                 })} • {new Date(createdAt).toLocaleTimeString('en-US', {
                                                     hour: '2-digit',
@@ -223,7 +223,7 @@ const Page = () => {
                                     </div>
 
                                     <div className="ml-14">
-                                        <p className="text-ghost-text leading-relaxed mb-4 text-lg">
+                                        <p className="text-ghost-text leading-relaxed mb-4 text-lg bg-white/5 rounded-xl p-2 md:p-4">
                                             {content}
                                         </p>
                                         {attachment && (

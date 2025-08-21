@@ -68,8 +68,8 @@ const Page = () => {
     const handleLogout = async () => {
         try {
             await axios.post('/api/logout')
-            toast.success('Logged out')
-            router.push('/login')
+            toast.success('Successfully logged out')
+            router.push('/')
         } catch (error: any) {
             toast.error(error?.response?.data?.message || error?.message)
         }

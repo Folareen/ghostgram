@@ -32,7 +32,7 @@ const Header = () => {
             setIsLoggedIn(false)
             setIsMobileMenuOpen(false)
             toast.success('Successfully logged out')
-            router.push('/login')
+            router.push('/')
         } catch (error: any) {
             toast.error('Failed to logout. Please try again.')
             console.error('Logout error:', error)
