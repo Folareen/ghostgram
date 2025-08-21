@@ -4,6 +4,7 @@ import axios from "axios"
 import { useParams, useRouter } from "next/navigation"
 import { FormEvent, useState } from "react"
 import { toast } from "react-toastify"
+import Link from "next/link"
 
 const SendMessage = () => {
     const { username } = useParams()
@@ -32,35 +33,127 @@ const SendMessage = () => {
             router.push('/signup')
             toast.success('message sent, its now your turn')
         } catch (error: any) {
-            console.log(error)
             toast.error(error?.response?.data?.message || error.message)
         } finally {
             setSending(false)
         }
     }
 
-    return <div>
-        <p>
-            Send message to {username}
-        </p>
-        <form onSubmit={handleSubmit}>
-            <input placeholder="enter message" onChange={(e) => {
-                setMessage(e.target.value)
-            }} value={message} />
-            <input type='file' onChange={(e) => {
-                setAttachment(e.currentTarget?.files && e.currentTarget?.files[0])
-            }} />
-            <button disabled={sending} type='submit'>
-                {
-                    sending ?
-                        'Sending...'
-                        :
-                        'Send'
-                }
-            </button>
-        </form>
+    return (
+        <div className="min-h-screen py-20 px-4">
+            <div className="absolute inset-0 overflow-hidden">
+                <div className="absolute top-20 left-10 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl"></div>
+                <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+            </div>
 
-    </div>
+            <div className="relative z-10 max-w-3xl mx-auto">
+                <div className="text-left mb-8">
+                    <Link
+                        href="/"
+                        className="inline-flex items-center space-x-2 text-ghost-text-secondary hover:text-white transition-all duration-300 px-4 py-2.5 rounded-xl hover:bg-white/5 hover:scale-105"
+                    >
+                        <span className="text-lg">←</span>
+                        <span className="font-medium">Back to Home</span>
+                    </Link>
+                </div>
+
+                <div className="text-center mb-6">
+                    <div className="flex items-center justify-center space-x-3 mb-4">
+                        <div className="w-12 h-12 bg-gradient-to-br from-ghost-accent to-ghost-purple rounded-xl flex items-center justify-center shadow-lg">
+                            <span className="text-3xl">👻</span>
+                        </div>
+                        <span className="text-2xl font-bold font-logo bg-gradient-to-r from-ghost-accent to-ghost-purple bg-clip-text text-transparent">
+                            GhostGram
+                        </span>
+                    </div>
+                    <h1 className="text-3xl font-bold font-heading text-white mb-3">Send Anonymous Message</h1>
+                    <p className="font-text text-lg text-ghost-text-secondary">Send a message to @{username}</p>
+                </div>
+
+                <div className="glass rounded-3xl p-10 neon-border hover:border-ghost-accent/40 transition-all duration-300">
+                    <form onSubmit={handleSubmit} className="space-y-8">
+                        <div>
+                            <label htmlFor="message" className="block text-sm font-semibold font-heading text-ghost-text mb-2">
+                                Your Message
+                            </label>
+                            <textarea
+                                id="message"
+                                value={message}
+                                onChange={(e) => setMessage(e.target.value)}
+                                className="w-full px-4 py-3 bg-white/5 border border-ghost-border rounded-xl text-white placeholder-ghost-text-secondary focus:border-ghost-accent transition-all duration-300 input-ghost text-base font-text resize-none"
+                                placeholder="Type your anonymous message here..."
+                                rows={6}
+                                required
+                            />
+                        </div>
+
+                        <div>
+                            <label htmlFor="attachment" className="block text-sm font-semibold font-heading text-ghost-text mb-2">
+                                Attachment (Optional)
+                            </label>
+                            <input
+                                id="attachment"
+                                type="file"
+                                onChange={(e) => {
+                                    setAttachment(e.currentTarget?.files && e.currentTarget?.files[0])
+                                }}
+                                accept="image/*"
+                                className="w-full px-4 py-3 bg-white/5 border border-ghost-border rounded-xl text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-ghost-accent file:text-white hover:file:bg-ghost-purple transition-all duration-300 file:font-button"
+                            />
+                        </div>
+
+                        <button
+                            type="submit"
+                            disabled={sending}
+                            className="font-button w-full py-3 bg-gradient-to-r from-ghost-accent to-ghost-purple hover:from-ghost-purple hover:to-ghost-accent text-white font-bold text-base rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                        >
+                            {sending ? (
+                                <div className="flex items-center justify-center space-x-2">
+                                    <div className="spinner w-4 h-4"></div>
+                                    <span>Sending Message...</span>
+                                </div>
+                            ) : (
+                                'Send Anonymous Message'
+                            )}
+                        </button>
+                    </form>
+
+                    <div className="glass rounded-3xl p-6 hover:border-ghost-accent/30 transition-all duration-300 border border-transparent mt-8">
+                        <h3 className="text-xl font-bold font-heading text-white mb-3">Privacy Information</h3>
+                        <div className="space-y-2">
+                            <div className="flex items-start space-x-3">
+                                <span className="text-ghost-accent text-base">🔒</span>
+                                <p className="font-text text-ghost-text-secondary text-sm">
+                                    Your message will be completely anonymous. The recipient won't know who sent it.
+                                </p>
+                            </div>
+                            <div className="flex items-start space-x-3">
+                                <span className="text-ghost-accent text-base">👻</span>
+                                <p className="font-text text-ghost-text-secondary text-sm">
+                                    No personal information is collected or stored with your message.
+                                </p>
+                            </div>
+                            <div className="flex items-start space-x-3">
+                                <span className="text-ghost-accent text-base">💬</span>
+                                <p className="font-text text-ghost-text-secondary text-sm">
+                                    You can send messages to anyone with a GhostGram profile.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mt-12">
+                    <Link
+                        href="/signup"
+                        className="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white font-semibold rounded-xl transition-all duration-300 btn-ghost ghost-glow shadow-lg hover:shadow-xl text-lg"
+                    >
+                        🚀 Create Account
+                    </Link>
+                </div>
+            </div>
+        </div>
+    )
 }
 
 export default SendMessage

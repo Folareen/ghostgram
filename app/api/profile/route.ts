@@ -17,7 +17,6 @@ export const GET = async (req: NextRequest) => {
             return NextResponse.json({ username: null }, { status: 401 })
         }
     } catch (error: any) {
-        console.log(error.message)
         return NextResponse.json({ message: 'Something went wrong' }, { status: 500 })
     }
 }

@@ -25,7 +25,6 @@ export const POST = async (req: NextRequest) => {
             return NextResponse.json({ message: 'Invalid username' }, { status: 400 })
         }
     } catch (error: any) {
-        console.log(error.message)
         return NextResponse.json({ message: 'Something went wrong' }, { status: 500 })
     }
 }

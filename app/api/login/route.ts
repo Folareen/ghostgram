@@ -12,10 +12,10 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
         const { username, password } = reqBody
 
         if (!username) {
-            return NextResponse.json({ message: 'Username is required' }, {status : 400})
+            return NextResponse.json({ message: 'Username is required' }, { status: 400 })
         }
         if (!password) {
-            return NextResponse.json({ message: 'Password is required' }, {status: 400})
+            return NextResponse.json({ message: 'Password is required' }, { status: 400 })
         }
 
         const user = await User.findOne({ username }).select('+password')
@@ -37,7 +37,6 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
         return response
 
     } catch (error: any) {
-        console.log(error.message)
-        return NextResponse.json({ message: 'Something went wrong' }, {status: 500})
+        return NextResponse.json({ message: 'Something went wrong' }, { status: 500 })
     }
 }

@@ -11,7 +11,7 @@ export const GET = async (req: NextRequest) => {
         if (token) {
             const data: any = jwt.decode(token.value)
 
-            const messages = await Message.find({receiver: data.username})
+            const messages = await Message.find({ receiver: data.username }).sort({ createdAt: -1 })
 
             return NextResponse.json({
                 messages
@@ -20,7 +20,6 @@ export const GET = async (req: NextRequest) => {
             return NextResponse.json({ messages: null, message: 'unathorized' }, { status: 401 })
         }
     } catch (error: any) {
-        console.log(error.message)
         return NextResponse.json({ message: 'Something went wrong' }, { status: 500 })
     }
 }
